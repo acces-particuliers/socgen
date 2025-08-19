@@ -1,186 +1,71 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
-  <title>Redirection en cours…</title>
-
-  <!-- Fallback si JS désactivé -->
-  <meta http-equiv="refresh" content="30; url=https://exemple.com/cible" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirection en cours...</title>
   <style>
-    :root{
-      --red:#d0021b;      /* rouge principal */
-      --red-dark:#a00115; /* hover */
-      --white:#ffffff;
-      --bg-grad:#ff4657;
-      --text:#222;
-      --muted:#666;
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: #d80027;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
     }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      background: linear-gradient(135deg, var(--red), var(--bg-grad));
-      color:var(--text);
+    .bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('8404c025-0537-4b5c-9d82-26c5de9f961b.png');
+      background-size: 100px 55px;
+      background-repeat: repeat;
+      opacity: 0.1;
+      z-index: 0;
     }
-    .wrap{
-      min-height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
+    .content {
+      z-index: 1;
     }
-    .card{
-      width:100%;
-      max-width:720px;
-      background:var(--white);
-      border-radius:16px;
-      box-shadow:0 12px 34px rgba(0,0,0,.18);
-      overflow:hidden;
-      border:1px solid rgba(0,0,0,.06);
+    .loader {
+      margin-top: 20px;
+      width: 80%;
+      max-width: 400px;
+      height: 20px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
     }
-    .header{
-      background:var(--red);
-      color:var(--white);
-      padding:22px 24px;
-      text-align:center;
+    .bar {
+      height: 100%;
+      width: 0;
+      background: #000;
+      animation: load 30s linear forwards;
     }
-    .header h1{ margin:0; font-size:22px; letter-spacing:.2px; }
-    .body{ padding:26px 24px; }
-    p{ margin:0 0 14px; line-height:1.6; font-size:16px; }
-    .note{ color:var(--muted); font-size:14px; margin-top:6px; }
-
-    .progress-wrap{
-      margin:18px 0 8px;
-    }
-    .progressbar{
-      height:14px;
-      background:#f1f1f1;
-      border-radius:999px;
-      overflow:hidden;
-      position:relative;
-    }
-    .progress{
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg, var(--red), #ff7a86);
-      will-change: width;
-    }
-    .timer{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-weight:700;
-      margin-top:8px;
-      font-variant-numeric: tabular-nums;
-    }
-    .actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      justify-content:center;
-      margin-top:22px;
-    }
-    .btn{
-      appearance:none;
-      border:0;
-      border-radius:10px;
-      padding:12px 18px;
-      font-weight:700;
-      cursor:pointer;
-      text-decoration:none;
-      text-align:center;
-      font-size:16px;
-    }
-    .btn-primary{ background:var(--red); color:var(--white); }
-    .btn-primary:hover{ background:var(--red-dark); }
-    .btn-ghost{
-      background:#fff; color:var(--red);
-      border:2px solid var(--red);
-    }
-    .footer{
-      padding:14px 24px 22px;
-      text-align:center;
-      font-size:13px;
-      color:#555;
-    }
-    @media (prefers-reduced-motion: reduce){
-      .progress{ transition:none !important; }
+    @keyframes load {
+      from { width: 0; }
+      to { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap" role="main">
-    <div class="card" aria-live="polite">
-      <div class="header">
-        <h1>Redirection en cours…</h1>
-      </div>
-
-      <div class="body">
-        <p>Vous allez être redirigé automatiquement vers la page demandée.</p>
-        <p class="note">Si rien ne se passe, utilisez le bouton ci-dessous.</p>
-
-        <div class="progress-wrap" aria-label="Barre de chargement">
-          <div class="progressbar" role="progressbar"
-               aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-describedby="timeleft">
-            <div id="progress" class="progress"></div>
-          </div>
-          <div class="timer">
-            <span>Chargement…</span>
-            <span id="timeleft">30,0 s</span>
-          </div>
-        </div>
-
-        <div class="actions">
-          <a id="goNow" class="btn btn-primary" href="https://exemple.com/cible">Aller maintenant</a>
-          <a class="btn btn-ghost" href="#" onclick="history.back();return false;">Retour</a>
-        </div>
-      </div>
-
-      <div class="footer">
-        Rouge & blanc · Barre dynamique 30 s · Compatible GitHub Pages / Vercel
-      </div>
-    </div>
+  <div class="bg"></div>
+  <div class="content">
+    <h1>Redirection en cours...</h1>
+    <p>Veuillez patienter pendant le chargement (30 secondes)</p>
+    <div class="loader"><div class="bar"></div></div>
   </div>
-
   <script>
-    // === Paramètres ===
-    const TARGET_URL = "https://exemple.com/cible"; // ← remplace par ta destination
-    const DURATION   = 30_000; // 30 secondes en millisecondes
-
-    // === Logique de chargement fluide ===
-    const progressEl = document.getElementById("progress");
-    const timeLeftEl = document.getElementById("timeleft");
-    const goNowEl    = document.getElementById("goNow");
-    document.querySelector('meta[http-equiv="refresh"]').setAttribute("content", "30; url="+TARGET_URL);
-    goNowEl.href = TARGET_URL;
-
-    let start = null;
-    function step(ts){
-      if(!start) start = ts;
-      const elapsed = ts - start;
-      const ratio = Math.min(elapsed / DURATION, 1);
-      const percent = (ratio * 100);
-
-      // Mise à jour UI
-      progressEl.style.width = percent + "%";
-      const leftMs = Math.max(DURATION - elapsed, 0);
-      timeLeftEl.textContent = (leftMs/1000).toFixed(1).replace('.', ',') + ' s';
-
-      // ARIA
-      const bar = progressEl.parentElement;
-      bar.setAttribute("aria-valuenow", Math.round(percent));
-
-      if (elapsed < DURATION) {
-        requestAnimationFrame(step);
-      } else {
-        window.location.href = TARGET_URL;
-      }
-    }
-    requestAnimationFrame(step);
+    setTimeout(() => {
+      window.location.href = "https://www.societegenerale.com/";
+    }, 30000);
   </script>
 </body>
 </html>
